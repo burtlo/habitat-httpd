@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# The httpd service requires these permissions to serve content
+#
+# This has been talked about being a bug. The Habitat Supervisor
+# has been reseting the permissions when the configuration changes.
+chmod 755 {{pkg.svc_data_path}}

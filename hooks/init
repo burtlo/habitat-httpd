@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# The httpd service requires these permissions to serve content
+chmod 755 {{pkg.svc_data_path}}
+
+# The httpd.conf states we should have this directory for the site.
+# All re-directs are going to the cgi-bin/hello-world but this is
+# likely still required for httpd.
+mkdir -p {{pkg.svc_data_path}}/htdocs
+
+# Install the web application which is only this single cgi-bin
+# file to the cgi-bin directory. If this was a larger application
+# this would likely be copying the enter contents of the a directory
+mkdir -p {{pkg.svc_data_path}}/cgi-bin
+
+cp {{pkg.path}}/hello-world  {{pkg.svc_data_path}}/cgi-bin/
+
+# The httpd service requires these permissions to serve this content
+chmod 755 {{pkg.svc_data_path}}/cgi-bin/hello-world
